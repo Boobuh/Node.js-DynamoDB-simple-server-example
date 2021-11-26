@@ -1,11 +1,12 @@
-var express = require('express')
+const express = require('express')
+const port = process.env.port || 3000
+const bodyParser = require('body-parser')
+
 var app = express()
 
-const port = process.env.port || 3000
+app.use(bodyParser.json())
 
-app.get('/', function(req, res){
-    res.send('Hello API!')
-})
+app.use('/emails', require('./routes/api'))
 
 app.listen(port, function(){
     console.log('api app started')
